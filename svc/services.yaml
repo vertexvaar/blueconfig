@@ -1,0 +1,20 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  VerteXVaaR\BlueConfig\:
+    resource: '../src/*'
+
+  VerteXVaaR\BlueConfig\Config:
+    public: true
+    shared: true
+    factory: [ '@VerteXVaaR\BlueConfig\Factory\ConfigFactory', 'build' ]
+
+  VerteXVaaR\BlueConfig\Factory\ConfigFactory:
+    arguments:
+      $providers: !tagged_iterator  'vertexvaar.bluesprints.config.provider'
+
+  VerteXVaaR\BlueConfig\Definition\DefinitionService:
+    arguments:
+      $definitions: !tagged_iterator 'vertexvaar.bluesprints.config.definition'
